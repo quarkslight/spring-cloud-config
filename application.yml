@@ -6,3 +6,57 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  servlet:
+    multipart:
+      max-file-size: 3MB
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/flex
+    username: master
+    password: master
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      schema: master
+      maximum-pool-size: 2
+      minimum-idle: 2 # keep it same as maximum-pool-size
+      leak-detection-threshold: 60000 # 60s
+  jpa:
+    database-platform: postgres
+    hibernate:
+      use-new-id-generator-mappings: false
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+  activemq:
+    broker-url: tcp://localhost:61616
+    broker-data-directory: data/broker-store
+    pooled: true
+    directory: data/message-store
+    initial-recovery-delay: 10000
+    recovery-delay: 10000
+    max-recovery-delay: 300000
+    backoff-multiplier: 2
+  jms:
+    concurrency: 3-10
+
+googledrive:
+  application-name: flex-documents
+  token-path: tokens
+  access-type: offline
+  redirect-link: http://pratik.qms.com:4200/app/flex/oauth/callback
+  auth-url: https://accounts.google.com/o/oauth2/auth
+  token-url: https://oauth2.googleapis.com/token
+  auth-provider-certificate-url: https://www.googleapis.com/oauth2/v1/certs
+
+flex:
+  home-redirection-url: app/flex/admin/home
+
+emailprops:
+  redirect-host: http://pratik.qms.com:4200/
